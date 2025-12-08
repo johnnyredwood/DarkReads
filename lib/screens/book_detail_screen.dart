@@ -169,10 +169,11 @@ class _BookDetailScreenState extends ConsumerState<BookDetailScreen> {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  Chip(
-                    label: Text(widget.book.category ?? 'Categoría no disponible'),
-                    backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.2),
-                  ),
+                  Text(
+              widget.book.category ?? 'Categoría no disponible',
+              style: Theme.of(context).textTheme.bodyMedium,
+              textAlign: TextAlign.justify,
+            ),
                 ],
               ),
             const SizedBox(height: 24),
@@ -666,7 +667,7 @@ class _BookDetailScreenState extends ConsumerState<BookDetailScreen> {
             ListTile(
               leading: const Icon(
                 Icons.warning,
-                color: Color(0xFFe94560),
+                color: Color.fromARGB(255, 111, 4, 22),
               ),
               title: const Text(
                 'Con Spoilers',

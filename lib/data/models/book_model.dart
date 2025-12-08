@@ -41,7 +41,9 @@ class BookModel extends Book {
       ratingsCount: volumeInfo['ratingsCount'] ?? 0,
       publishedDate: volumeInfo['publishedDate'] ?? '',
       pageCount: volumeInfo['pageCount'] ?? 0,
-      category: volumeInfo['mainCategory'] ?? '',
+      category: (volumeInfo['categories'] != null && (volumeInfo['categories'] as List).isNotEmpty)
+          ? (volumeInfo['categories'] as List).first.toString()
+          : null,
       previewLink: volumeInfo['previewLink'],
     );
   }

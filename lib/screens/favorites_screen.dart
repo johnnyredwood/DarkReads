@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/favorites_provider.dart';
+import '../providers/service_providers.dart';
 import '../widgets/book_card.dart';
 import 'favorite_lists_screen.dart';
 
@@ -52,18 +53,79 @@ class FavoritesScreen extends ConsumerWidget {
             );
           }
           
-          return GridView.builder(
-            padding: const EdgeInsets.all(16),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 0.46, // Ajustado para 120 width / 260 height
-              crossAxisSpacing: 16,
-              mainAxisSpacing: 16,
-            ),
-            itemCount: favoriteBooks.length,
-            itemBuilder: (context, index) {
-              return BookCard(book: favoriteBooks[index]);
-            },
+          return Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: ElevatedButton.icon(
+                  onPressed: () async {
+                    try {
+                      final geminiService = ref.read(geminiServiceProvider);
+                      final recommendations = await geminiService.generatePersonalizedRecommendations(favoriteBooks);
+                      
+                      if (context.mounted) {
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            backgroundColor: Colors.grey[900],
+                            title: const Text(
+                              'Recomendaciones IA',
+                              style: TextStyle(color: Color.fromARGB(255, 167, 25, 25)),
+                            ),
+                            content: SingleChildScrollView(
+                              child: Text(
+                                recommendations,
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: const Text(
+                                  'Cerrar',
+                                  style: TextStyle(color: Color.fromARGB(255, 167, 25, 25)),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                    } catch (e) {
+                      if (context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Error al generar recomendaciones: $e'),
+                            backgroundColor: const Color.fromARGB(255, 167, 25, 25),
+                          ),
+                        );
+                      }
+                    }
+                  },
+                  icon: const Icon(Icons.auto_awesome),
+                  label: const Text('Generar Sugerencias IA'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 167, 25, 25),
+                    foregroundColor: Colors.white,
+                    minimumSize: const Size(double.infinity, 48),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: GridView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.6,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                  ),
+                  itemCount: favoriteBooks.length,
+                  itemBuilder: (context, index) {
+                    return BookCard(book: favoriteBooks[index]);
+                  },
+                ),
+              ),
+            ],
           );
         },
         loading: () => const Center(

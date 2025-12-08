@@ -31,7 +31,7 @@ class AuthService {
   }
 
   String _generateSalt(String email) {
-    return email.toLowerCase() + 'darkreads_salt';
+    return '${email.toLowerCase()}darkreads_salt';
   }
 
   Future<bool> register({
@@ -75,7 +75,6 @@ class AuthService {
       _dbService.setCurrentUser(userId);
       await _dbService.setCurrentSession(userId);
       
-      // Verificar que se guardó
       final saved = await _dbService.getUserByEmail(user.email);
       print('Verificación: Usuario ${saved != null ? "SÍ" : "NO"} está en la DB');
       
@@ -90,7 +89,6 @@ class AuthService {
     required String password,
   }) async {
     try {
-      // Debug: Ver todos los usuarios registrados
       final allUsers = await _dbService.getAllUsers();
       print('Total usuarios en DB: ${allUsers.length}');
       for (var u in allUsers) {

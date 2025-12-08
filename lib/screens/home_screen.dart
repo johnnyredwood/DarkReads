@@ -18,9 +18,9 @@ class HomeScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'DarkReads',
-          style: const TextStyle(
+          style: TextStyle(
             color: Color.fromARGB(255, 167, 25, 25),
             fontWeight: FontWeight.bold,
           ),
@@ -96,10 +96,10 @@ class HomeScreen extends ConsumerWidget {
               ),
             ),
             const SizedBox(height: 12),
-            SingleChildScrollView(
+            const SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: const [
+                children: [
                   CategoryCard(title: 'Terror', category: 'horror', icon: Icons.nightlight),
                   CategoryCard(title: 'Misterio', category: 'mystery', icon: Icons.search),
                   CategoryCard(title: 'Crimen', category: 'crime', icon: Icons.gavel),
@@ -110,11 +110,23 @@ class HomeScreen extends ConsumerWidget {
             const SizedBox(height: 24),
             
             // Libros populares de terror
-            Text(
-              'Libros de Terror Populares',
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: const Color.fromARGB(255, 167, 25, 25),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Libros de Terror Populares',
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    color: const Color.fromARGB(255, 167, 25, 25),
+                  ),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.refresh, color: Color.fromARGB(255, 167, 25, 25)),
+                  onPressed: () {
+                    ref.invalidate(horrorBooksProvider);
+                  },
+                  tooltip: 'Actualizar libros',
+                ),
+              ],
             ),
             const SizedBox(height: 12),
             horrorBooks.when(
@@ -137,11 +149,23 @@ class HomeScreen extends ConsumerWidget {
             const SizedBox(height: 24),
             
             // Libros de misterio
-            Text(
-              'Misterios por Resolver',
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: const Color.fromARGB(255, 167, 25, 25),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Misterios por Resolver',
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    color: const Color.fromARGB(255, 167, 25, 25),
+                  ),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.refresh, color: Color.fromARGB(255, 167, 25, 25)),
+                  onPressed: () {
+                    ref.invalidate(mysteryBooksProvider);
+                  },
+                  tooltip: 'Actualizar libros',
+                ),
+              ],
             ),
             const SizedBox(height: 12),
             mysteryBooks.when(

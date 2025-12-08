@@ -1,11 +1,11 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'dart:io';
 import '../../domain/entidades/book_domain.dart';
 import '../../domain/entidades/user.dart';
 import '../../domain/entidades/comment.dart';
 import '../../domain/entidades/favorite_list.dart';
 
-// ---------- SQLite ----------
 class BookDb {
 
   static final BookDb instancia = BookDb._internal();
@@ -20,11 +20,18 @@ class BookDb {
     return _db!;
   }
 
+  // Delete and recreate database (use carefully!)
+  static Future<void> resetDatabase() async {
+    String path = join(await getDatabasesPath(), 'darkreads.db');
+    await deleteDatabase(path);
+    _db = null;
+  }
+
   static Future<Database> init() async {
     String path = join(await getDatabasesPath(), 'darkreads.db');
     return await openDatabase(
       path,
-      version: 1,
+      version: 3,
       onCreate: (db, version) async {
         // Tabla de favoritos
         await db.execute('''
@@ -38,7 +45,7 @@ class BookDb {
             ratingsCount INTEGER,
             publishedDate TEXT,
             pageCount INTEGER,
-            categories TEXT,
+            category TEXT,
             userId TEXT NOT NULL
           )
         ''');
@@ -97,10 +104,15 @@ class BookDb {
         // Insertar sesión vacía
         await db.insert('session', {'id': 1, 'userId': null});
       },
+      onUpgrade: (db, oldVersion, newVersion) async {
+        if (oldVersion < 2) {
+          // Add category column to existing favo table
+          await db.execute('ALTER TABLE favo ADD COLUMN category TEXT');
+        }
+        // Version 3: No changes, just forcing migration
+      },
     );
   }
-
-  // ==================== FAVORITOS ====================
   
   // Insertar book destacado en SQLite
   Future<void> insertarDestacado(Book book, String userId) async {
@@ -117,7 +129,7 @@ class BookDb {
         'ratingsCount': book.ratingsCount,
         'publishedDate': book.publishedDate,
         'pageCount': book.pageCount,
-        'categories': book.category,
+        'category': book.category,
         'userId': userId,
       },
       conflictAlgorithm: ConflictAlgorithm.replace,
@@ -169,8 +181,6 @@ class BookDb {
     );
     return result.isNotEmpty;
   }
-
-  // ==================== USUARIOS ====================
   
   Future<void> insertarUsuario(User user) async {
     final db = await database;
@@ -259,8 +269,6 @@ class BookDb {
       );
     });
   }
-
-  // ==================== SESIÓN ====================
   
   Future<void> establecerSesion(String? userId) async {
     final db = await database;
@@ -277,8 +285,6 @@ class BookDb {
     if (maps.isEmpty) return null;
     return maps[0]['userId'] as String?;
   }
-
-  // ==================== COMENTARIOS ====================
   
   Future<void> agregarComentario(Comment comment) async {
     final db = await database;
@@ -376,8 +382,6 @@ class BookDb {
       'disliked': disliked,
     };
   }
-
-  // ==================== LISTAS ====================
   
   Future<void> crearLista(FavoriteList lista, String userId) async {
     final db = await database;
@@ -480,4 +484,3 @@ class BookDb {
     return result.isNotEmpty;
   }
 }
-

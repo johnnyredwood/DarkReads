@@ -26,7 +26,7 @@ class BookCard extends ConsumerWidget {
       },
       child: SizedBox(
         width: 120,
-        height: 260, // Altura fija para evitar overflow
+        height: 200,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -113,10 +113,10 @@ class BookCard extends ConsumerWidget {
                         child: Container(
                           padding: const EdgeInsets.all(6),
                         decoration: BoxDecoration(
-                          gradient: LinearGradient(
+                          gradient: const LinearGradient(
                             colors: [
-                              const Color(0xFF4ecca3),
-                              const Color(0xFF00d2ff),
+                              Color.fromARGB(255, 87, 3, 0),
+                              Color.fromARGB(255, 162, 17, 17),
                             ],
                           ),
                           borderRadius: BorderRadius.circular(20),
