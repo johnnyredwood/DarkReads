@@ -61,12 +61,12 @@ class ListDetailScreen extends ConsumerWidget {
 
           return GridView.builder(
             padding: const EdgeInsets.all(16),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              childAspectRatio: 0.6,
+              childAspectRatio: 0.60,
               crossAxisSpacing: 16,
-              mainAxisSpacing: 16,
-            ),
+              mainAxisSpacing: 4,
+          ),
             itemCount: books.length,
             itemBuilder: (context, index) {
               final book = books[index];

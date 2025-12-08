@@ -31,12 +31,12 @@ class CategoryScreen extends ConsumerWidget {
         data: (books) => books.isEmpty
             ? const Center(child: Text('No se encontraron libros'))
             : GridView.builder(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(12),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
-                  childAspectRatio: 0.46, // Ajustado para 120 width / 260 height
+                  crossAxisSpacing: 12,
+                  mainAxisSpacing: 2,
+                  childAspectRatio: 0.65,
                 ),
                 itemCount: books.length,
                 itemBuilder: (context, index) {
