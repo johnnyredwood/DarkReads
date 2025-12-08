@@ -107,7 +107,7 @@ class HomeScreen extends ConsumerWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 20),
             
             // Libros populares de terror
             Row(
@@ -131,13 +131,13 @@ class HomeScreen extends ConsumerWidget {
             const SizedBox(height: 12),
             horrorBooks.when(
               data: (books) => SizedBox(
-                height: 270,
+                height: 225,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: books.take(10).length,
                   itemBuilder: (context, index) {
                     return Padding(
-                      padding: const EdgeInsets.only(right: 12),
+                      padding: const EdgeInsets.only(right: 5),
                       child: BookCard(book: books[index]),
                     );
                   },
@@ -146,7 +146,7 @@ class HomeScreen extends ConsumerWidget {
               loading: () => const Center(child: CircularProgressIndicator()),
               error: (error, stack) => Text('Error: $error'),
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 20),
             
             // Libros de misterio
             Row(
@@ -170,7 +170,7 @@ class HomeScreen extends ConsumerWidget {
             const SizedBox(height: 12),
             mysteryBooks.when(
               data: (books) => SizedBox(
-                height: 270,
+                height: 225,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: books.take(10).length,

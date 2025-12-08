@@ -150,25 +150,24 @@ class FavoriteListsScreen extends ConsumerWidget {
             padding: const EdgeInsets.all(16),
             itemCount: lists.length,
             itemBuilder: (context, index) {
-              final list = lists[index];
-              final isDefault = list.id == 'default';
+              final lista = lists[index];
 
               return Card(
                 margin: const EdgeInsets.only(bottom: 12),
                 child: ListTile(
-                  leading: CircleAvatar(
-                    backgroundColor: isDefault ? const Color.fromARGB(255, 0, 0, 0) : Colors.blue,
+                  leading: const CircleAvatar(
+                    backgroundColor: Color.fromARGB(255, 86, 4, 4),
                     child: Icon(
-                      isDefault ? Icons.star : Icons.folder,
+                      Icons.folder,
                       color: Colors.white,
                     ),
                   ),
                   title: Text(
-                    list.name,
+                    lista.name,
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  trailing: !isDefault
-                      ? PopupMenuButton(
+                  trailing:
+                      PopupMenuButton(
                           icon: const Icon(Icons.more_vert),
                           itemBuilder: (context) => [
                             const PopupMenuItem(
@@ -194,18 +193,18 @@ class FavoriteListsScreen extends ConsumerWidget {
                           ],
                           onSelected: (value) {
                             if (value == 'rename') {
-                              _showRenameListDialog(context, ref, list);
+                              _showRenameListDialog(context, ref, lista);
                             } else if (value == 'delete') {
-                              _showDeleteConfirmation(context, ref, list);
+                              _showDeleteConfirmation(context, ref, lista);
                             }
                           },
                         )
-                      : null,
+                  ,
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ListDetailScreen(list: list),
+                        builder: (context) => ListDetailScreen(list: lista),
                       ),
                     );
                   },
