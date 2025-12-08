@@ -1,6 +1,5 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import 'dart:io';
 import '../../domain/entidades/book_domain.dart';
 import '../../domain/entidades/user.dart';
 import '../../domain/entidades/comment.dart';
