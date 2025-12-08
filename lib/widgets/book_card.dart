@@ -24,14 +24,13 @@ class BookCard extends ConsumerWidget {
           ),
         );
       },
-      child: Container(
+      child: SizedBox(
         width: 120,
-        margin: const EdgeInsets.only(right: 12),
+        height: 260, // Altura fija para evitar overflow
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Portada del libro con botón de IA
             SizedBox(
               width: 120,
               height: 160,
@@ -226,13 +225,13 @@ class BookCard extends ConsumerWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF0f3460),
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         ),
         title: const Row(
           children: [
-            Icon(Icons.auto_awesome, color: Color(0xFF4ecca3)),
+            Icon(Icons.auto_awesome, color: Color.fromARGB(255, 108, 4, 4)),
             SizedBox(width: 12),
             Text(
               'Resumen con IA',
@@ -252,7 +251,7 @@ class BookCard extends ConsumerWidget {
             ListTile(
               leading: const Icon(
                 Icons.visibility_off,
-                color: Color(0xFF4ecca3),
+                color: Color.fromARGB(255, 92, 4, 4),
               ),
               title: const Text(
                 'Sin Spoilers',
@@ -286,7 +285,7 @@ class BookCard extends ConsumerWidget {
             ListTile(
               leading: const Icon(
                 Icons.warning,
-                color: Color(0xFFe94560),
+                color: Color.fromARGB(255, 82, 4, 17),
               ),
               title: const Text(
                 'Con Spoilers',

@@ -158,25 +158,20 @@ class _BookDetailScreenState extends ConsumerState<BookDetailScreen> {
               textAlign: TextAlign.justify,
             ),
             const SizedBox(height: 24),
-            if (widget.book.categories.isNotEmpty)
+            if (widget.book.category != null)
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Categorías',
+                    'Categoría',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  Wrap(
-                    spacing: 8,
-                    children: widget.book.categories.map((category) {
-                      return Chip(
-                        label: Text(category),
-                        backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.2),
-                      );
-                    }).toList(),
+                  Chip(
+                    label: Text(widget.book.category!),
+                    backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.2),
                   ),
                 ],
               ),

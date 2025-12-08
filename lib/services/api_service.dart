@@ -5,9 +5,7 @@ import '../data/models/book_model.dart';
 
 class ApiService {
   static const String _baseUrl = 'https://www.googleapis.com/books/v1/volumes';
-  // Optional: Add your Google Books API key here for better rate limits
-  // Get one from: https://console.cloud.google.com/apis/credentials
-  static const String? _apiKey = null; // Replace with 'YOUR_API_KEY' if you have one
+  static const String? _apiKey = null;
   
   Future<List<Book>> fetchBooksByCategory(String category) async {
     try {

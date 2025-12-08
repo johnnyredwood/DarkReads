@@ -36,7 +36,7 @@ class CategoryScreen extends ConsumerWidget {
                   crossAxisCount: 2,
                   crossAxisSpacing: 16,
                   mainAxisSpacing: 16,
-                  childAspectRatio: 0.7,
+                  childAspectRatio: 0.46, // Ajustado para 120 width / 260 height
                 ),
                 itemCount: books.length,
                 itemBuilder: (context, index) {

@@ -157,7 +157,7 @@ class FavoriteListsScreen extends ConsumerWidget {
                 margin: const EdgeInsets.only(bottom: 12),
                 child: ListTile(
                   leading: CircleAvatar(
-                    backgroundColor: isDefault ? Colors.amber : Colors.blue,
+                    backgroundColor: isDefault ? const Color.fromARGB(255, 0, 0, 0) : Colors.blue,
                     child: Icon(
                       isDefault ? Icons.star : Icons.folder,
                       color: Colors.white,

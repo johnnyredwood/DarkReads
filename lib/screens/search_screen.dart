@@ -259,7 +259,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                               crossAxisCount: 2,
                               crossAxisSpacing: 16,
                               mainAxisSpacing: 16,
-                              childAspectRatio: 0.6,
+                              childAspectRatio: 0.46, // Ajustado para 120 width / 260 height
                             ),
                             itemCount: _searchResults.length,
                             itemBuilder: (context, index) {

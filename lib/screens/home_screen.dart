@@ -119,12 +119,15 @@ class HomeScreen extends ConsumerWidget {
             const SizedBox(height: 12),
             horrorBooks.when(
               data: (books) => SizedBox(
-                height: 220,
+                height: 270,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: books.take(10).length,
                   itemBuilder: (context, index) {
-                    return BookCard(book: books[index]);
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 12),
+                      child: BookCard(book: books[index]),
+                    );
                   },
                 ),
               ),
@@ -143,12 +146,15 @@ class HomeScreen extends ConsumerWidget {
             const SizedBox(height: 12),
             mysteryBooks.when(
               data: (books) => SizedBox(
-                height: 220,
+                height: 270,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: books.take(10).length,
                   itemBuilder: (context, index) {
-                    return BookCard(book: books[index]);
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 12),
+                      child: BookCard(book: books[index]),
+                    );
                   },
                 ),
               ),

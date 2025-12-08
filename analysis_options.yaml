@@ -21,8 +21,23 @@ linter:
   # `// ignore_for_file: name_of_lint` syntax on the line or in the file
   # producing the lint.
   rules:
-    # avoid_print: false  # Uncomment to disable the `avoid_print` rule
+    avoid_print: false  # Permitir prints para debugging
     # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
+
+analyzer:
+  errors:
+    # Reducir warnings que pueden causar problemas de hot reload
+    invalid_annotation_target: ignore
+    deprecated_member_use: ignore
+    unused_import: warning
+  exclude:
+    - build/**
+    - android/**
+    - ios/**
+    - linux/**
+    - macos/**
+    - windows/**
+    - web/**
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options

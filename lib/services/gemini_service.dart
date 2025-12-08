@@ -5,13 +5,22 @@ import '../domain/entidades/book_domain.dart';
 class GeminiService {
   static String get _apiKey => dotenv.env['GEMINI_API_KEY'] ?? '';
   
-  late final GenerativeModel _model;
+  GenerativeModel? _model;
   
   GeminiService() {
-    _model = GenerativeModel(
-      model: 'gemini-1.5-flash-latest',
-      apiKey: _apiKey,
-    );
+    if (_apiKey.isNotEmpty) {
+      try {
+        _model = GenerativeModel(
+          model: 'gemini-2.5-flash',
+          apiKey: _apiKey,
+        );
+      } catch (e) {
+        print('Error inicializando modelo Gemini: $e');
+        throw Exception('Error al inicializar Gemini: $e');
+      }
+    } else {
+      throw Exception('GEMINI_API_KEY no configurada en .env');
+    }
   }
 
   Future<String> generateSummaryWithoutSpoilers(Book book) async {
@@ -36,11 +45,11 @@ Resumen:
 ''';
 
       final content = [Content.text(prompt)];
-      final response = await _model.generateContent(content);
+      final response = await _model!.generateContent(content);
       
       return response.text ?? 'No se pudo generar el resumen.';
     } catch (e) {
-      return 'Error al generar resumen: ${e.toString()}';
+      throw Exception('Error al generar resumen: $e');
     }
   }
 
@@ -66,11 +75,11 @@ Resumen:
 ''';
 
       final content = [Content.text(prompt)];
-      final response = await _model.generateContent(content);
+      final response = await _model!.generateContent(content);
       
       return response.text ?? 'No se pudo generar el resumen.';
     } catch (e) {
-      return 'Error al generar resumen: ${e.toString()}';
+      throw Exception('Error al generar resumen: $e');
     }
   }
 
@@ -102,11 +111,43 @@ Recomendaciones:
 ''';
 
       final content = [Content.text(prompt)];
-      final response = await _model.generateContent(content);
+      final response = await _model!.generateContent(content);
       
       return response.text ?? 'No se pudieron generar recomendaciones.';
     } catch (e) {
-      return 'Error al generar recomendaciones: ${e.toString()}';
+      throw Exception('Error al generar recomendaciones: $e');
+    }
+  }
+
+  Future<String> generatePersonalizedRecommendationBookCard(Book selectedBook) async {
+    if (selectedBook.title.isEmpty) {
+      return 'No hay ningún libro seleccionado para recibir recomendaciones personalizadas.';
+    }
+
+    try {
+      final prompt = '''
+Eres un experto en literatura de misterio, crimen y terror.
+Basándote en el siguiente libro favorito del usuario, genera 5 recomendaciones personalizadas:
+
+Libro favorito:
+${selectedBook.title} por ${selectedBook.authors.join(', ')}
+
+Por favor proporciona:
+1. 5 títulos de libros recomendados (con autor)
+2. Una breve explicación (1-2 líneas) de por qué cada libro es una buena recomendación
+3. Asegúrate de que sean libros del género de misterio, crimen o terror
+4. Responde en español
+5. Formato: "*[Título] - [Autor]\n   Razón: [explicación breve]\n"
+
+Recomendaciones:
+''';
+
+      final content = [Content.text(prompt)];
+      final response = await _model!.generateContent(content);
+      
+      return response.text ?? 'No se pudieron generar recomendaciones.';
+    } catch (e) {
+      throw Exception('Error al generar recomendaciones: $e');
     }
   }
 }
