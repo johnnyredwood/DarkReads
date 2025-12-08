@@ -195,7 +195,6 @@ class _AiSummaryScreenState extends ConsumerState<AiSummaryScreen> {
                     ),
                     const SizedBox(height: 20),
 
-                    // Resumen generado por IA
                     Card(
                       color: Colors.grey[900],
                       elevation: 4,
@@ -225,7 +224,7 @@ class _AiSummaryScreenState extends ConsumerState<AiSummaryScreen> {
                                 const Text(
                                   'Resumen generado por Gemini AI',
                                   style: TextStyle(
-                                    color: Color(0xFF4ecca3),
+                                    color: Color.fromARGB(255, 255, 255, 255),
                                     fontSize: 14,
                                     fontWeight: FontWeight.bold,
                                   ),

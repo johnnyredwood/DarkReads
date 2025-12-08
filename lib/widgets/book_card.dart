@@ -322,7 +322,7 @@ class BookCard extends ConsumerWidget {
             onPressed: () => Navigator.pop(context),
             child: const Text(
               'Cancelar',
-              style: TextStyle(color: Color(0xFF4ecca3)),
+              style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
             ),
           ),
         ],

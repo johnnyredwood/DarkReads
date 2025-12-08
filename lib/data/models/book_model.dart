@@ -12,7 +12,7 @@ class BookModel extends Book {
     required super.ratingsCount,
     required super.publishedDate,
     required super.pageCount,
-    required super.categories,
+    super.category,
     super.previewLink,
   });
 
@@ -20,10 +20,8 @@ class BookModel extends Book {
     final volumeInfo = json['volumeInfo'] ?? {};
     final imageLinks = volumeInfo['imageLinks'] ?? {};
     
-    // Get thumbnail URL - try different sizes
     String? thumbnailUrl = imageLinks['thumbnail'] ?? imageLinks['smallThumbnail'];
     
-    // Always convert to HTTPS if URL exists
     if (thumbnailUrl != null && thumbnailUrl.isNotEmpty) {
       thumbnailUrl = thumbnailUrl.replaceAll('http://', 'https://');
       
@@ -43,7 +41,7 @@ class BookModel extends Book {
       ratingsCount: volumeInfo['ratingsCount'] ?? 0,
       publishedDate: volumeInfo['publishedDate'] ?? '',
       pageCount: volumeInfo['pageCount'] ?? 0,
-      categories: List<String>.from(volumeInfo['categories'] ?? []),
+      category: volumeInfo['mainCategory'] ?? '',
       previewLink: volumeInfo['previewLink'],
     );
   }
@@ -59,7 +57,7 @@ class BookModel extends Book {
       'ratingsCount': ratingsCount,
       'publishedDate': publishedDate,
       'pageCount': pageCount,
-      'categories': categories,
+      'category': category,
     };
   }
 
@@ -74,7 +72,7 @@ class BookModel extends Book {
       'ratingsCount': ratingsCount,
       'publishedDate': publishedDate,
       'pageCount': pageCount,
-      'categories': categories.join(', '),
+      'category': category,
     };
   }
 
@@ -89,7 +87,7 @@ class BookModel extends Book {
       ratingsCount: map['ratingsCount'],
       publishedDate: map['publishedDate'],
       pageCount: map['pageCount'],
-      categories: (map['categories'] as String).split(', '),
+      category: map['category'],
     );
   }
 }

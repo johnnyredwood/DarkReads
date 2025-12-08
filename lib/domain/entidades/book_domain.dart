@@ -9,7 +9,7 @@ class Book {
   final int? ratingsCount;
   final String? publishedDate;
   final int? pageCount;
-  final List<String> categories;
+  final String? category;
   final String? previewLink;
 
   Book({
@@ -22,7 +22,7 @@ class Book {
     this.ratingsCount,
     this.publishedDate,
     this.pageCount,
-    this.categories = const [],
+    this.category,
     this.previewLink,
   });
 }

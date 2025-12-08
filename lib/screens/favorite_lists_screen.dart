@@ -167,9 +167,6 @@ class FavoriteListsScreen extends ConsumerWidget {
                     list.name,
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  subtitle: Text(
-                    '${list.bookIds.length} ${list.bookIds.length == 1 ? 'libro' : 'libros'}',
-                  ),
                   trailing: !isDefault
                       ? PopupMenuButton(
                           icon: const Icon(Icons.more_vert),

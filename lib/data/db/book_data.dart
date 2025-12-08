@@ -117,7 +117,7 @@ class BookDb {
         'ratingsCount': book.ratingsCount,
         'publishedDate': book.publishedDate,
         'pageCount': book.pageCount,
-        'categories': book.categories.join(', '),
+        'categories': book.category,
         'userId': userId,
       },
       conflictAlgorithm: ConflictAlgorithm.replace,
@@ -154,7 +154,7 @@ class BookDb {
         ratingsCount: maps[i]['ratingsCount'] as int?,
         publishedDate: maps[i]['publishedDate'] as String?,
         pageCount: maps[i]['pageCount'] as int?,
-        categories: (maps[i]['categories'] as String).split(', '),
+        category: maps[i]['category'] as String?,
       );
     });
   }
@@ -480,3 +480,4 @@ class BookDb {
     return result.isNotEmpty;
   }
 }
+

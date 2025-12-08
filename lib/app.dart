@@ -18,7 +18,7 @@ class DarkReadsApp extends ConsumerWidget {
         scaffoldBackgroundColor: const Color(0xFF121212),
         colorScheme: ColorScheme.fromSwatch().copyWith(
           primary: const Color.fromARGB(255, 167, 25, 25),
-          secondary: const Color(0xFF8A2BE2),
+          secondary: const Color.fromARGB(255, 0, 0, 0),
         ),
         textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme),
         appBarTheme: const AppBarTheme(

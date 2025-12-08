@@ -170,7 +170,7 @@ class _BookDetailScreenState extends ConsumerState<BookDetailScreen> {
                   ),
                   const SizedBox(height: 8),
                   Chip(
-                    label: Text(widget.book.category!),
+                    label: Text(widget.book.category ?? 'Categoría no disponible'),
                     backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.2),
                   ),
                 ],
@@ -198,8 +198,7 @@ class _BookDetailScreenState extends ConsumerState<BookDetailScreen> {
                       });
                     },
                     icon: Icon(
-                      _isFavorite ? Icons.favorite : Icons.favorite_border,
-                      color: _isFavorite ? const Color.fromARGB(255, 167, 25, 25) : null,
+                      _isFavorite ? Icons.favorite : Icons.favorite_border
                     ),
                     label: Text(_isFavorite ? 'En Favoritos' : 'Agregar a Favoritos'),
                   ),
@@ -607,13 +606,13 @@ class _BookDetailScreenState extends ConsumerState<BookDetailScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF0f3460),
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         ),
         title: const Row(
           children: [
-            Icon(Icons.psychology, color: Color(0xFF4ecca3)),
+            Icon(Icons.psychology, color: Color.fromARGB(255, 73, 2, 2)),
             SizedBox(width: 12),
             Text(
               'Resumen con IA',
@@ -633,7 +632,7 @@ class _BookDetailScreenState extends ConsumerState<BookDetailScreen> {
             ListTile(
               leading: const Icon(
                 Icons.visibility_off,
-                color: Color(0xFF4ecca3),
+                color: Color.fromARGB(255, 81, 3, 3),
               ),
               title: const Text(
                 'Sin Spoilers',
@@ -704,7 +703,7 @@ class _BookDetailScreenState extends ConsumerState<BookDetailScreen> {
             onPressed: () => Navigator.pop(context),
             child: const Text(
               'Cancelar',
-              style: TextStyle(color: Color(0xFF4ecca3)),
+              style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
             ),
           ),
         ],
