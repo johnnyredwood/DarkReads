@@ -2,7 +2,7 @@ class User {
   final String id;
   final String username;
   final String email;
-  final String passwordHash; // Nunca almacenar contraseñas en texto plano
+  final String passwordHash;
   final DateTime createdAt;
 
   User({
