@@ -2,9 +2,9 @@ class Comment {
   final String id;
   final String bookId;
   final String userId;
-  final String username; // Para mostrar sin hacer lookup adicional
+  final String username;
   final String text;
-  final bool liked; // true = me gustó, false = no me gustó
+  final bool liked; //True si le gusto y false no :v
   final DateTime createdAt;
 
   Comment({
